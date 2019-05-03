@@ -1,0 +1,60 @@
+{
+    "name": "githubhelper",
+    "version": "0.1.0",
+    "description": "Assist with Github",
+    "author": {
+        "name": "Deane Smith"
+    },
+    "private": true,
+    "license": "MIT",
+    "bin": {
+        "electron": "./node_modules/.bin/electron"
+    },
+    "devDependencies": {
+        "electron": "^5.0.0",
+        "electron-builder": "^20.39.0",
+        "electron-packager": "^13.1.1"
+    },
+    "build": {
+        "appId": "com.example.starter",
+        "directories": {
+            "buildResources": "build",
+            "output": "dist",
+            "app": "app"
+        },
+        "dmg": {
+            "icon": "app/build/icons/favicon.icns",
+            "contents": [
+                {
+                    "x": 110,
+                    "y": 150
+                },
+                {
+                    "x": 240,
+                    "y": 150,
+                    "type": "link",
+                    "path": "/Applications"
+                }
+            ]
+        },
+        "linux": {
+            "target": [
+                "AppImage",
+                "deb"
+            ]
+        },
+        "win": {
+            "target": "nsis"
+        }
+    },
+    "scripts": {
+        "start": "electron ./app/build/main.js",
+        "package-linux": "dist-linux --dir",
+        "dist-linux": "build -l --x64 --ia32",
+        "dist-windows": "build -w --x64 --ia32",
+        "package-windows": "dist-windows --dir",
+        "dist-macos": "build -m --x64 --ia32",
+        "package-macos": "dist-macos --dir",
+        "postinstall": "install-app-deps"
+    }
+}
